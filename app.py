@@ -9,18 +9,13 @@ import os
 from openai import OpenAI
 import json
 
-model = OpenAI()
-model.timeout = 15    
 
 #################### OpenAI ####################
 api_key = os.getenv("OPENAI_API_KEY")
+
 if not api_key:
     with st.sidebar:
         api_key = st.text_input("Please enter your OpenAI API key")
-        if api_key:
-            model.api_key = api_key
-
-
 
 
 #################### Functions ####################
@@ -37,6 +32,8 @@ def run_pyppeteer(url):
 # Get the url from prompt using GPT3.5
 def get_url_from_prompt(prompt):
 
+    model = OpenAI(api_key=api_key)
+    model.timeout = 30
     messages = [
         {
             "role": "system",
@@ -98,6 +95,9 @@ async def capture_screenshots(url):
         return screenshots_dict
   
 def scrape_images_using_gtpVision(prompt, screenshot):
+
+    model = OpenAI(api_key=api_key)
+    model.timeout = 30
 
     messages = [
 		{
