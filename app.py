@@ -9,14 +9,8 @@ import asyncio
 from pyppeteer import launch
 import base64
 
-
-if config('COMPANY_NAME'):
-    company_name = config('COMPANY_NAME')
-else:
-    company_name = "Virtu.web"
-
 if not config('OPENAI_API_KEY'):
-    st.write("Please set your OPENAI_API_KEY in .env file or in your environment variables")
+    st.warning("Please set your OPENAI_API_KEY in .env file or in your environment variables")
 
 #################### Pyppeteer ####################
 # Define the function to be run in a separate process
@@ -31,7 +25,7 @@ def run_pyppeteer(url):
 
 #################### Chatbot ####################
 
-st.title("💬 " + company_name)
+st.title("💬 Virtu.web")
 st.caption("🚀 A web scraper using AI (GPT4Vision + Pyppeteer) by Virtu.ai")
 
 prompt = st.text_input("Your question?", key="search_q")
